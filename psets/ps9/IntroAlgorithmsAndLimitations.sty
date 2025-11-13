@@ -1,0 +1,678 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+
+%Package requiring
+\RequirePackage{version}
+\RequirePackage[linesnumbered,lined,boxed,commentsnumbered,noend,algochapter]{algorithm2e}
+\RequirePackage{todonotes}
+\RequirePackage{fullpage}
+%\RequirePackage{dirtytalk}
+\RequirePackage{graphicx}
+\RequirePackage[export]{adjustbox}
+\RequirePackage{hyperref,url}
+%\RequirePackage{enumitem}
+%\setlistdepth{6}
+\RequirePackage{amsfonts}
+\RequirePackage{amsmath}
+\RequirePackage{amsthm}
+\RequirePackage{amssymb}
+\RequirePackage{listings}
+\RequirePackage{xcolor}
+%\RequirePackage{listings}
+%\RequirePackage{float}
+%\usepackage{mathtools}
+\RequirePackage{stmaryrd}
+%\RequirePackage{multicol}
+%\RequirePackage{enumitem}
+%\RequirePackage{fancyhdr}
+\RequirePackage{wrapfig}
+%\RequirePackage{pdfpages}
+
+\RequirePackage{cancel}
+%\RequirePackage[shortlabels]{enumitem}
+
+%Various environments
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{informaldefinition}[theorem]{Informal Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{answer}{Answer}
+\newtheorem{problem}{Problem}[chapter]
+
+%Configuring links
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+}
+
+%Draft comment features
+\newif\ifdraft
+\drafttrue
+\newcommand{\ted}[1]{\ifdraft{\todo[inline,color=red!20!white]{\textbf{Ted:} #1}}\fi}
+\newcommand{\zach}[1]{\ifdraft{\todo[inline,color=blue!20!white]{\textbf{Zach:} #1}}\fi}
+\newcommand{\salil}[1]{\ifdraft{\todo[inline,color=purple!20!white]{\textbf{Salil:} #1}}\fi}
+\newcommand{\anurag}[1]{\ifdraft{\todo[inline,color=green!20!white]{\textbf{Anurag Anshu:} #1}}\fi}
+\newcommand{\matt}[1]{\ifdraft{\todo[inline,color=blue!20!white]{\textbf{Matt:} #1}}\fi}
+
+\newcommand{\anuragg}[1]{\textcolor{green}{\textbf{Anurag Anshu:} #1}}
+\newcommand{\adam}[1]{\ifdraft{\todo[inline,color=orange!20!white]{\textbf{Adam:} #1}}\fi}
+\newcommand{\jennifer}[1]{\ifdraft{\todo[inline,color=blue!20!white]{\textbf{Jennifer:} #1}}\fi}
+\newcommand{\silvia}[1]{\ifdraft{\todo[inline,color=olive!20!white]{\textbf{Silvia:} #1}}\fi}
+\newcommand{\sanket}[1]{\ifdraft{\todo[inline,color=green!20!white]{\textbf{Sanket:} #1}}\fi}
+\newcommand{\andrew}[1]{\ifdraft{\todo[inline,color=violet!20!white]{\textbf{Andrew:} #1}}\fi}
+\newcommand{\melissa}[1]{\ifdraft{\todo[inline,color=orange!20!white]{\textbf{Melissa:} #1}}\fi}
+\newcommand{\ben}[1]{\ifdraft{\todo[inline,color=green!20!white]{\textbf{Ben:} #1}}\fi}
+\newcommand{\noa}[1]{\ifdraft{\todo[inline,color=green!20!white]{\textbf{Noa:} #1}}\fi}
+\newcommand{\michael}[1]{\ifdraft{\todo[inline,color=orange!20!white]{\textbf{Michael:} #1}}\fi}
+\newcommand{\michelle}[1]{\ifdraft{\todo[inline,color=violet!20!white]{\textbf{Michelle:} #1}}\fi}
+\newcommand{\anuragm}[1]{\ifdraft{\todo[inline,color=pink!20!white]{\textbf{Anurag M:} #1}}\fi}
+\newcommand{\Eric}[1]{\ifdraft{\todo[inline,color=orange!20!white]{\textbf{Eric:} #1}}\fi}
+
+\newcommand{\patrick}[1]{\ifdraft{\todo[inline,color=pink!20!white]{\textbf{Patrick:} #1}}\fi}
+\newcommand{\kathy}[1]{\ifdraft{\todo[inline,color=yellow!20!white]{\textbf{Kathy:} #1}}\fi}
+\newcommand{\benji}[1]{\ifdraft{\todo[inline,color=cyan!20!white]{\textbf{Benji:} #1}}\fi}
+\newcommand{\olivia}[1]{\ifdraft{\todo[inline,color=violet!20!white]{\textbf{Olivia:} #1}}\fi}
+\newcommand{\ayana}[1]{\ifdraft{\todo[inline,color=violet!20!white]{\textbf{Ayana:} #1}}\fi}
+\newcommand{\iris}[1]{\ifdraft{\todo[inline,color=blue!20!white]{\textbf{Iris:} #1}}\fi}
+\newcommand{\jenn}[1]{\ifdraft{\todo[inline,color=violet!20!white]{\textbf{Jenn G:} #1}}\fi}
+\newcommand{\maxwell}[1]{\ifdraft{\todo[inline,color=cyan!20!white]{\textbf{Maxwell:} #1}}\fi}
+\newcommand{\elizabeth}[1]{\ifdraft{\todo[inline,color=pink!20!white]{\textbf{Elizabeth:} #1}}\fi}
+\newcommand{\tarun}[1]{\ifdraft{\todo[inline,color=lime!20!white]{\textbf{Tarun:} #1}}\fi}
+\newcommand{\teresa}[1]{\ifdraft{\todo[inline,color=cyan!20!white]{\textbf{Teresa:} #1}}\fi}
+\newcommand{\prin}[1]{\ifdraft{\todo[inline,color=cyan!20!white]{\textbf{Prin:} #1}}\fi}
+\newcommand{\jayden}[1]{\ifdraft{\todo[inline,color=pink!20!white]{\textbf{Jayden:} #1}}\fi}
+\newcommand{\katherine}[1]{\ifdraft{\todo[inline,color=lime!20!white]{\textbf{Katherine:} #1}}\fi}
+\newcommand{\rhea}[1]{\ifdraft{\todo[inline,color=pink!20!white]{\textbf{Rhea:} #1}}\fi}
+\newcommand{\ashley}[1]{\ifdraft{\todo[inline,color=cyan!20!white]{\textbf{Ashley:} #1}}\fi}
+\newcommand{\natalie}[1]{\ifdraft{\todo[inline,color=teal!20!white]{\textbf{Natalie:} #1}}\fi}
+\newcommand{\gili}[1]{\ifdraft{\todo[inline,color=cyan!20!white]{\textbf{Gili:} #1}}\fi}
+\newcommand{\staffNote}[1]
+{\ifdraft{\todo[inline,color=orange!20!white]{\textbf{Note:} #1}}\fi}
+
+\newif\ifdetails % fill in details that are omitted in lecture handout version
+\newif\ifsender % for sender notes rather than receiver notes
+\senderfalse
+\newif\ifharvard % e.g. for Harvard course numbers
+
+% stuff for algorithm environment
+\SetNoFillComment
+
+\let\oldnl\nl% Store \nl in \oldnl
+\newcommand{\nonl}{\renewcommand{\nl}{\let\nl\oldnl}}% Remove line number for one line
+
+
+% first argument is the keyword for the algorithm name
+% second argument is the arguments to the algorithm
+\newcommand{\AlgTitle}[2]{
+\nonl #1{#2}:\\
+\setcounter{AlgoLine}{-1}
+\caption{\protect #1{}}}
+
+% this version has a custom caption
+\newcommand{\AlgTitleCaption}[3]{
+\nonl #1{#2}:\\
+\setcounter{AlgoLine}{-1}
+\caption{#3}}
+
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\SetKwInOut{Instances}{Instances}
+\SetKwInOut{Answers}{Valid Answers}
+\SetKwInOut{Queries}{Queries}
+\SetKwInOut{Updates}{Updates}
+\SetKwInOut{Variables}{Variables}
+
+\newlength\myindent
+\setlength\myindent{2em}
+\newcommand\bindent{%
+  \begingroup
+  \setlength{\itemindent}{\myindent}
+  \addtolength{\algorithmicindent}{\myindent}
+}
+\newcommand\eindent{\endgroup}
+
+\SetAlgoFuncName{Data-Structure Problem}{Data-Structure Problem}
+\SetKwFunction{HashTable}{HashTable}
+\SetKwFunction{WeirdPower}{WeirdPower}
+\SetKwFunction{WeirdPowerMod}{WeirdPowerMod}
+\SetKwFunction{SameSum}{SameSum}
+\SetKwFunction{Duplicate}{Duplicate}
+\SetKwFunction{CalculateHeight}{CalculateHeight}
+\SetKwFunction{BC}{BC}
+\SetKwFunction{RadixSort}{RadixSort}
+\SetKwFunction{MergeSort}{MergeSort}
+\SetKwFunction{SingletonBucketSort}{SingletonBucketSort}
+\SetKwFunction{BucketSort}{BucketSort}
+\SetKwFunction{CountingSort}{CountingSort}
+\SetKwFunction{InsertionSort}{InsertionSort}
+\SetKwFunction{SquaredDistanceToNegativeOne}{SquaredDistanceToNegativeOne}
+\SetKwFunction{ExhaustiveSearchSort}{ExhaustiveSearchSort}
+\SetKwFunction{Merge}{Merge}
+\SetKwFunction{CountingSort}{CountingSort}
+\SetKwFunction{QuickSelect}{QuickSelect}
+\SetKwFunction{IntSchedule}{IntervalSchedulingViaSorting}
+\SetKwFunction{Insert}{Insert}
+\SetKwFunction{Delete}{Delete}
+%\SetKwFunction{BFSone}{BFSv0}
+\SetKwFunction{BFS}{BFS}
+\SetKwFunction{BFSlabel}{BFSlabel}
+\SetKwFunction{BFSCC}{BFS-CC}
+\SetKwFunction{RW}{RandomWalk}
+\SetKwFunction{GreedyColoring}{GreedyColoring}
+\SetKwFunction{BFSColoring}{BFSColoring}
+\SetKwFunction{TbTColoring}{3by2Coloring}
+\SetKwFunction{GreedyIndSet}{GreedyIndSet}
+\SetKwFunction{GreedyIntSch}{GreedyIntervalScheduling}
+\SetKwFunction{MaxMatchAugPaths}{MaxMatchingAugPaths}
+\SetKwFunction{ResolutionInOrder}{ResolutionInOrder}
+\SetKwFunction{ExtractAssignment}{ExtractAssignment}
+\SetKwFunction{LongPathViaSAT}{LongPathViaSAT}
+\SetKwFunction{TrimmedMean}{TrimmedMean}
+\SetKwFunction{BinarySearch}{BinarySearch}
+\SetKwFunction{ExhaustiveSearch}{ExhaustiveSearch}
+\SetKwFunction{ImbalancedSearch}{ImbalancedSearch}
+\SetKwFunction{RecursiveSearch}{RecursiveSearch}
+\SetKwFunction{StoogeSort}{StoogeSort}
+\SetKwFunction{TwoSATSolve}{TwoSATSolve}
+\SetKwFunction{TwoSATDecSolve}{TwoSATDecSolve}
+\SetKwFunction{Search}{Search}
+\SetKwFunction{Minimum}{Minimum}
+\SetKwFunction{Maximum}{Maximum}
+\SetKwFunction{Predecessor}{Predecessor}
+\SetKwFunction{RandomSubsampling}{RandomSubsampling}
+\SetKwFunction{MergeSortSelect}{MergeSortSelect}
+\SetKwFunction{MedianQuickSelect}{Median-of-3 QuickSelect}
+\SetKwFunction{BronKerbosch}{BronKerbosch}
+\SetKwFunction{MaximalISColoring}{MaximalIS+BFS}
+\SetKwFunction{SATtoVSS}{SAT2VSS}
+\SetKwFunction{SATDecisionToSAT}{SATDecisionToSAT}
+
+\newcommand{\compprobname}[1]{\text{\sc #1}}
+\newcommand{\IndependentSet}{\compprobname{Independent Set}}
+\newcommand{\IndependentSetOptimizationSearch}{\compprobname{Independent Set--Optimization Search}}
+\newcommand{\IndependentSetThresholdSearch}{\compprobname{Independent Set--Threshold Search}}
+\newcommand{\IndependentSetThresholdDecision}{\compprobname{Independent Set--Threshold Decision}}
+\newcommand{\ConnectedComponents}{\compprobname{Connected Components}}
+\newcommand{\RegisterAllocation}{\compprobname{Register Allocation}}
+\newcommand{\GraphTwoColoring}{\compprobname{Graph 2-Coloring}}
+\newcommand{\GraphThreeColoring}{\compprobname{Graph 3-Coloring}}
+\newcommand{\GraphkColoring}{\compprobname{Graph $k$-Coloring}}
+\newcommand{\ShortestWalk}{\compprobname{Shortest Walk}}
+\newcommand{\ShortestPath}{\compprobname{Shortest Path}}
+\newcommand{\SingleSourceDistances}{\compprobname{Single-Source Distances}}
+\newcommand{\SingleSourceShortestPaths}{\compprobname{Single-Source Shortest Paths}}
+\newcommand{\ShortestRotatingWalk}{\compprobname{Shortest Rotating Walk}}
+\newcommand{\UndirectedSTconnectivity}{\compprobname{Undirected S-T Connectivity}}
+\newcommand{\PrimalityTesting}{\compprobname{Primality Testing}}
+\newcommand{\IdentityTesting}{\compprobname{Identity Testing}}
+\newcommand{\EstimateProportion}{\compprobname{EstimateProportion}}
+\newcommand{\WeightedSelection}{\compprobname{Weighted Selection}}
+\newcommand{\Selection}{\compprobname{Selection}}
+\newcommand{\KeywordSearch}{\compprobname{Keyword Search}}
+\newcommand{\Sorting}{\compprobname{Sorting}}
+\newcommand{\SubsetSum}{\compprobname{Subset Sum}}
+\newcommand{\SubsetSumDecision}{\compprobname{Subset Sum--Decision}}
+\newcommand{\VectorSubsetSum}{\compprobname{Vector Subset Sum}}
+\newcommand{\LongPath}{\compprobname{Long Path}}
+\newcommand{\LongPathDecision}{\compprobname{Long Path--Decision}}
+\newcommand{\LongestPath}{\compprobname{Longest Path}}
+\newcommand{\HamiltonianPath}{\compprobname{Hamiltonian Path}}
+\newcommand{\HamiltonianCycle}{\compprobname{Hamiltonian Cycle}}
+\newcommand{\EulerianWalk}{\compprobname{Eulerian Walk}}
+\newcommand{\TravellingSalespersonProblem}{\compprobname{Traveling Salesperson Problem}}
+\newcommand{\TSP}{\compprobname{TSP}}
+\newcommand{\SAT}{\compprobname{SAT}}
+\newcommand{\SATDecision}{\compprobname{SAT--Decision}}
+\newcommand{\ThreeSATDecision}{\compprobname{3-SAT--Decision}}
+\newcommand{\TwoSAT}{\compprobname{2-SAT}}
+\newcommand{\ThreeSAT}{\compprobname{3-SAT}}
+\newcommand{\kSAT}{\compprobname{$k$-SAT}}
+\newcommand{\Satisfiability}{\compprobname{Satisfiability}}
+\newcommand{\CNFSAT}{\compprobname{CNF-Satisfiability}}
+\newcommand{\DNFSAT}{\compprobname{DNF-Satisfiability}}
+\newcommand{\SortingFinite}{\compprobname{SortingOnFiniteUniverse}}
+\newcommand{\SortingBignum}{\compprobname{SortingBignums}}
+\newcommand{\SortingOnNaturalNumbers}{\compprobname{SortingOnNaturalNumbers}}
+\newcommand{\IntervalScheduling}{\compprobname{Interval Scheduling}}
+\newcommand{\IntervalSchedulingDecision}{\compprobname{IntervalScheduling--Decision}}
+\newcommand{\IntervalSchedulingOptimization}{\compprobname{IntervalScheduling--Optimization}}
+\newcommand{\IntervalSchedulingColoring}{\compprobname{IntervalScheduling--Coloring}}
+\newcommand{\IntervalSchedulingDecisionFinite}{\compprobname{IntervalScheduling--Decision--OnFiniteUniverse}}
+\newcommand{\IntervalSchedulingQueries}{\compprobname{IntervalScheduling--Queries}}
+\newcommand{\SearchSortedArray}{\compprobname{SearchSortedArray}}
+\newcommand{\GraphColoring}{\compprobname{Graph Coloring}}
+\newcommand{\GraphColoringDecision}{\compprobname{Graph Coloring--Decision}}
+\newcommand{\StaticPredecessors}{\compprobname{StaticPredecessors}}
+\newcommand{\StaticSuccessors}{\compprobname{StaticSuccessors}}
+\newcommand{\StaticPredecessorsAndSuccessors}{\compprobname{StaticPredecessors+Successors}}
+\newcommand{\DynamicPredecessorsAndSuccessors}{\compprobname{DynamicPredecessors+Successors}}
+\newcommand{\Predecessors}{\compprobname{Predecessors}}
+\newcommand{\Successors}{\compprobname{Successors}}
+\newcommand{\PredecessorsAndSuccessors}{\compprobname{Predecessors+Successors}}
+\newcommand{\Dictionary}{\compprobname{Dictionary}}
+\newcommand{\RangeSelect}{\compprobname{RangeSelect}}
+\newcommand{\AreaOfConvexPolygon}{\compprobname{AreaOfConvexPolygon}}
+\newcommand{\DuplicateSearch}{\compprobname{DuplicateSearch}}
+\newcommand{\MaximumMatching}{\compprobname{Maximum Matching}}
+\newcommand{\MaximumVertexWeightedMatching}{\compprobname{Maximum Vertex-Weighted Matching}}
+\newcommand{\ConvexHull}{\compprobname{ConvexHull}}
+\newcommand{\BoundedHalting}{\compprobname{Bounded Halting}}
+\newcommand{\CombinatorialAuctions}{\compprobname{Combinatorial Auctions}}
+\newcommand{\ProteinFolding}{\compprobname{Protein Folding}}
+\newcommand{\ThreeDMatching}{\compprobname{3-D Matching}}
+\newcommand{\ShortProof}{\compprobname{Short Proof}}
+\newcommand{\Factoring}{\compprobname{Factoring}}
+\newcommand{\NashEquilibria}{\compprobname{Nash Equilibria}}
+\newcommand{\FlipkSAT}{\compprobname{Flip $k$-SAT}}
+\newcommand{\FlipThreeSAT}{\compprobname{Flip 3-SAT}}
+\newcommand{\FlipFourSAT}{\compprobname{Flip 4-SAT}}
+
+
+%\SetAlgoProcName{Computational Problem}{Computational Problem}
+%\SetProcNameSty{scshape}
+\newcommand{\compprob}[3]{
+\begin{center}
+\fbox{
+\begin{minipage}{.9\linewidth}   
+\textbf{Input:} #2\\ \ \\
+\textbf{Output:} #3
+\end{minipage}
+}\\
+\textbf{Computational Problem} #1
+\end{center}
+}
+
+
+\newcommand{\staticdsprob}[3]{
+\begin{center}
+\fbox{
+\begin{minipage}{.9\linewidth}   
+\textbf{Input:} #2\\ \ \\
+\textbf{Queries:} #3
+\end{minipage}
+}\\
+\textbf{Abstract Data Type} #1
+\end{center}
+}
+
+
+\newcommand{\dynamdsprob}[3]{
+\begin{center}
+\fbox{
+\begin{minipage}{.9\linewidth}   
+\textbf{Updates:} #2\\ \ \\
+\textbf{Queries:} #3
+\end{minipage}
+}\\
+\textbf{Abstract Data Type} #1
+\end{center}
+}
+\iffalse
+\newcommand{\compprob}[3]{
+\fbox{\parbox{\textwidth}{\noindent \underline{\textbf{#1}}:
+\begin{itemize}
+\item \textbf{Instances:} #2
+\item \textbf{Valid Answers:} #3
+\end{itemize}}
+}}
+\fi
+
+% For Python code examples
+% style taken from Overleaf docs: https://www.overleaf.com/learn/latex/Code_listing#Supported_languages
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{pythonstyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=pythonstyle}
+
+%\newenvironment{pythoncode}[1]{
+%\begin{lstlisting}[language=Python]}{\end{lstlisting}}
+
+
+\newcommand{\details}[2]{\ifdetails #1 \else \ \\\vspace{#2ex}\fi}
+%\newcommand{\details}[2]{\ifdetails #1 \else \phantom{#1}\fi}
+\newif\ifsolutions
+\newcommand{\solution}[2]{\ifsolutions{\color{blue} #1} \else \vspace{#2} \fi}
+
+\newenvironment{mysolution} {\begingroup \color{blue}} { \endgroup}
+
+\newif\ifhints
+
+\newcommand{\hints}[1]{\ifhints{\color{violet} Hints: \\ #1} \else \fi}
+
+\newenvironment{myhints} 
+{
+    \begingroup \color{violet} 
+    \textbf{Hints:} \par 
+    \ignorespaces
+} 
+{
+    \ignorespacesafterend \endgroup
+}
+
+
+\newif\ifChatGPT
+
+\newcommand{\ChatGPT}[1]{\ifChatGPT{\color{orange} ChatGPT: \\ #1} \else \fi}
+
+\newenvironment{myChatGPT} 
+{
+    \begingroup \color{orange} 
+    \textbf{ChatGPT:} \par 
+    \ignorespaces
+} 
+{
+    \ignorespacesafterend \endgroup
+}
+
+\newcommand{\initialize} {
+\ifsolutions \else \excludeversion{mysolution} \fi
+\ifhints \else \excludeversion{myhints} \fi
+\ifChatGPT \else \excludeversion{myChatGPT} \fi
+}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+
+\newcommand{\size}{\mathsf{size}}
+\newcommand{\Inputs}{\mathcal{I}}
+\newcommand{\Outputs}{\mathcal{O}}
+\newcommand{\Jinputs}{\mathcal{J}}
+\newcommand{\Joutputs}{\mathcal{P}}
+\newcommand{\QuerySet}{\mathcal{Q}}
+\newcommand{\UpdateSet}{\mathcal{U}}
+\newcommand{\Preprocess}{\mathrm{Preprocess}}
+\newcommand{\Eval}{\mathrm{Eval}}
+\newcommand{\EvalQ}{\mathrm{EvalQ}}
+\newcommand{\EvalU}{\mathrm{EvalU}}
+\newcommand{\Time}{T}
+\newcommand{\pivot}{\mathrm{pivot}}
+\newcommand{\smallerpivot}{\mathrm{smaller}}
+\newcommand{\largerpivot}{\mathrm{larger}}
+\newcommand{\equalpivot}{\mathrm{equal}}
+
+\newcommand{\tO}{\tilde{O}}
+\newcommand{\Var}{V}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\var}{\texttt{var}}
+\newcommand{\op}{\texttt{op}}
+
+\newcommand{\TQS}{T_{\mathrm{QS}}}
+
+% RAM Program Variables
+\newcommand{\RAMvar}[1]{\texttt{#1}}
+
+\newcommand{\inputpointer}{\RAMvar{input\_ptr}}
+\newcommand{\inputcounter}{\RAMvar{input\_ctr}}
+\newcommand{\outputcounter}{\RAMvar{output\_ctr}}
+\newcommand{\outputpointer}{\RAMvar{output\_ptr}}
+\newcommand{\outputlen}{\RAMvar{output\_len}}
+\newcommand{\inputlen}{\RAMvar{input\_len}}
+\newcommand{\keytype}{\RAMvar{key}}
+\newcommand{\outputvar}{\RAMvar{output}}
+\newcommand{\base}{\RAMvar{base}}
+\newcommand{\outerkeyptr}{\RAMvar{outer\_key\_ptr}}
+\newcommand{\outerremaining}{\RAMvar{outer\_rem}}
+\newcommand{\innerremaining}{\RAMvar{inner\_rem}}
+\newcommand{\innerkeyptr}{\RAMvar{inner\_key\_ptr}}
+\newcommand{\outerkey}{\RAMvar{outer\_key}}
+\newcommand{\innerkey}{\RAMvar{inner\_key}}
+\newcommand{\keydiff}{\RAMvar{key\_diff}}
+\newcommand{\insertkey}{\RAMvar{insert\_key}}
+\newcommand{\insertvalue}{\RAMvar{insert\_value}}
+\newcommand{\tempptr}{\RAMvar{temp\_ptr}}
+\newcommand{\tempkey}{\RAMvar{temp\_key}}
+\newcommand{\tempvalue}{\RAMvar{temp\_value}}
+\newcommand{\two}{\RAMvar{two}}
+\newcommand{\one}{\RAMvar{one}}
+\newcommand{\zero}{\RAMvar{zero}}
+\newcommand{\three}{\RAMvar{three}}
+\newcommand{\eleven}{\RAMvar{eleven}}
+\newcommand{\seventeen}{\RAMvar{seventeen}}
+\newcommand{\thirteen}{\RAMvar{thirteen}}
+\newcommand{\reg}{\RAMvar{reg}}
+\newcommand{\stackptr}{\RAMvar{stack\_ptr}}
+\newcommand{\nodeptr}{\RAMvar{node\_ptr}}
+\newcommand{\childptr}{\RAMvar{child\_ptr}}
+\newcommand{\leftheight}{\RAMvar{left\_height}}
+\newcommand{\rightheight}{\RAMvar{right\_height}}
+\newcommand{\diffheights}{\RAMvar{diff\_heights}}
+\newcommand{\height}{\RAMvar{height}}
+\newcommand{\branch}{\RAMvar{branch}}
+\newcommand{\temp}{\RAMvar{temp}}
+\newcommand{\inputlencopy}{\RAMvar{input\_len\_copy}}
+\newcommand{\tempzero}{\temp_0}
+\newcommand{\tempone}{\temp_1}
+\newcommand{\temptwo}{\temp_2}
+\newcommand{\tempthree}{\temp_3}
+\newcommand{\tempfour}{\temp_4}
+\newcommand{\wordlen}{\RAMvar{word\_len}}
+\newcommand{\memsize}{\RAMvar{mem\_size}}
+\newcommand{\maxval}{\RAMvar{max\_val}}
+\newcommand{\remaining}{\RAMvar{remaining}}
+\newcommand{\startnext}{\RAMvar{start\_next}}
+\newcommand{\random}{\RAMvar{random}}
+\newcommand{\oracle}{\text{ORACLE}}
+\newcommand{\ecurr}{\RAMvar{end\_curr}}
+\newcommand{\cmd}{\RAMvar{cmd}}
+\newcommand{\W}{\RAMvar{W}}
+\newcommand{\result}{\RAMvar{result}}
+\newcommand{\counter}{\RAMvar{counter}}
+\newcommand{\nextbase}{\RAMvar{nextbase}}
+\newcommand{\ivar}{\RAMvar{i}}
+\newcommand{\prefixlowsum}{\RAMvar{prefixlowsum}}
+\newcommand{\prefixhighsum}{\RAMvar{prefixhighsum}}
+\newcommand{\prefixsumlow}{\RAMvar{prefixsumlow}}
+\newcommand{\prefixsumhigh}{\RAMvar{prefixsumhigh}}
+\newcommand{\suffixsumlow}{\RAMvar{suffixsumlow}}
+\newcommand{\suffixsumhigh}{\RAMvar{suffixsumhigh}}
+\newcommand{\diff}{\RAMvar{diff}}
+
+
+
+\newcommand{\CNFof}{\mathrm{CNFof}}
+\newcommand{\READ}{``\texttt{read}"}
+
+
+
+\newcommand{\Exp}{\mathrm{E}}
+\newcommand{\poly}{\mathrm{poly}}
+
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\dist}{\mathrm{dist}}
+\newcommand{\length}{\mathrm{length}}
+
+\newcommand{\dout}{\mathrm{deg}_{\mathit{out}}}
+\newcommand{\din}{\mathrm{deg}_{\mathit{in}}}
+\newcommand{\dmax}{\mathrm{deg}_{\mathit{max}}}
+%\newcommand{\deg}{\mathrm{deg}}
+\newcommand{\Nout}{\mathrm{N}_{\mathit{out}}}
+\newcommand{\Nin}{\mathrm{N}_{\mathit{in}}}
+\newcommand{\Nbr}{\texttt{Nbr}}
+\newcommand{\Nbrout}{\texttt{Nbr}_{\texttt{out}}}
+\newcommand{\Nbrin}{\texttt{Nbr}_{\texttt{in}}}
+\newcommand{\distarr}{\texttt{dist}}
+
+\newcommand{\Sin}{S_{\mathit{in}}}
+\newcommand{\Sout}{S_{\mathit{out}}}
+\newcommand{\nMIS}{\#\mathrm{MIS}}
+
+\newcommand{\zo}{\{0,1\}}
+\newcommand{\Clauses}{\mathcal{C}}
+\newcommand{\Frontier}{\mathcal{F}}
+\newcommand{\Resolvents}{\mathcal{R}}
+\newcommand{\res}{\diamond}
+\newcommand{\sat}{\normalfont{\texttt{satisfiable}}}
+\newcommand{\unsat}{\normalfont{\texttt{unsatisfiable}}}
+
+\newcommand{\phimaj}{\varphi_{\mathit{maj}}}
+\newcommand{\phipal}{\varphi_{\mathit{pal}}}
+\newcommand{\Simplify}{\texttt{Simplify}}
+\newcommand{\Cfin}{\mathcal{C}_{\mathit{fin}}}
+\newcommand{\kfin}{k_{\mathit{fin}}}
+
+\newcommand{\xfail}{x_f}
+\newcommand{\Spec}{\mathrm{Spec}}
+\newcommand{\accept}{\texttt{accept}}
+\newcommand{\reject}{\texttt{reject}}
+\newcommand{\yes}{\texttt{yes}}
+\newcommand{\no}{\texttt{no}}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Ind}{\mathrm{Ind}}
+
+\newcommand{\memptr}{\texttt{mem\_ptr}}
+
+\newcommand{\TIME}{\mathsf{TIME}}
+\newcommand{\TIMEsearch}{\mathsf{TIME_{search}}}
+\newcommand{\Psearch}{\mathsf{P_{search}}}
+\newcommand{\Ptime}{\mathsf{P}}
+\newcommand{\EXPsearch}{\mathsf{EXP_{search}}}
+\newcommand{\EXPtime}{\mathsf{EXP}}
+\newcommand{\EXP}{\mathsf{EXP}}
+\newcommand{\NP}{\mathsf{NP}}
+\newcommand{\NPsearch}{\mathsf{NP_{search}}}
+\newcommand{\NPhard}{\mathsf{NP}\text{-hard}}
+\newcommand{\NPsearchhard}{\mathsf{NP_{search}}\text{-hard}}
+\newcommand{\NPcomplete}{\mathsf{NP}\text{-complete}}
+\newcommand{\NPcompleteness}{\mathsf{NP}\text{-completeness}}
+\newcommand{\NPsearchcomplete}{\mathsf{NP_{search}}\text{-complete}}
+\newcommand{\FP}{\mathsf{FP}}
+
+\newcommand{\decision}[1]{#1\text{-decision}}
+
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cP}{\mathcal{P}}
+
+\newcommand{\Timb}{T_{\mathit{imb}}}
+\newcommand{\Trec}{T_{\mathit{rec}}}
+\newcommand{\Tbin}{T_{\mathit{bin}}}
+
+\newcommand{\searchq}{\texttt{search}}
+\newcommand{\predecessorq}{\texttt{predecessor}}
+%\newcommand{\nextsmallerq}{\texttt{next-smaller}}
+\newcommand{\successorq}{\texttt{successor}}
+\newcommand{\insertq}{\texttt{insert}}
+\newcommand{\deleteq}{\texttt{delete}}
+\newcommand{\rankq}{\texttt{rank}}
+\newcommand{\minq}{\texttt{min}}
+\newcommand{\maxq}{\texttt{max}}
+\newcommand{\searchanddeleteq}{\texttt{search-and-delete}}
+\newcommand{\selectq}{\texttt{select}}
+\newcommand{\rotate}{\texttt{rotate}}
+
+\newcommand\makeemptybox[1]{
+  \par
+  \begingroup
+    \setlength{\fboxsep}{0pt}%
+    \framebox[\linewidth]{%
+      \vrule height 0pt depth #1 width 0pt
+    }%
+  \endgroup
+}
+
+\newcommand{\DeterministicHash}{\texttt{DeterministicHash}}
+\newcommand{\RandomHash}{\texttt{RandomHash}}
+\newcommand{\employeeid}{\texttt{employeeid}}
+\newcommand{\salary}{\texttt{salary}}
+\newcommand{\optimize}{\texttt{optimize}}
+
+\newcommand{\treeT}{\texttt{T}}
+\newcommand{\btv}{\texttt{v}}
+\newcommand{\btw}{\texttt{w}}
+\newcommand{\btr}{\texttt{r}}
+\newcommand{\None}{\texttt{None}}
+\newcommand{\Key}{\texttt{K}}
+\newcommand{\Value}{\texttt{V}}
+\newcommand{\leftT}{\texttt{left}}
+\newcommand{\rightT}{\texttt{right}}
+
+\newcommand{\true}{\texttt{true}}
+\newcommand{\false}{\texttt{false}}
+
+\newcommand{\qeq}{\overset{?}{=}}
+\newcommand{\eq}{=}
+\newcommand{\qleq}{\overset{?}{\leq}}
+
+\newcommand{\Tmerge}{T_{\mathit{merge}}}
+\newcommand{\Tmergesort}{T_{\mathit{mergesort}}}
+\newcommand{\Tinsert}{T_{\mathit{insertsort}}}
+\newcommand{\Texhaust}{T_{\mathit{exhaustsort}}}
+
+
+\newcommand{\URL}{\mathit{url}}
+\newcommand{\PR}{\mathrm{PR}}
+\newcommand{\WWW}{\mathrm{WWW}}
+\newcommand{\key}{\mathit{key}}
+
+\newcommand{\enc}{\mathrm{enc}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cN}{\mathcal{N}}
+
+\newcommand{\crash}{\texttt{crash}}
+
+
+    \newcommand{\bday}{\texttt{bday}}
+\newcommand{\id}{\texttt{id}}
+
+\newcommand{\Apred}{A_{\mathit{pred}}}
+
+\newcommand{\support}{Y}
+\newcommand{\oppose}{N}
+
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\mood}[2]{#1 \; \% \; #2}
+
+\newcommand{\emptyclause}{(\;)}
+
+\newcommand{\val}{\texttt{value}}
+
+\newcommand{\pub}{\mathit{pub}}
+\newcommand{\nonce}{\mathit{nonce}}
+\newcommand{\Enc}{\texttt{Enc}}
+\newcommand{\Dec}{\texttt{Dec}}
+\newcommand{\Gen}{\texttt{Gen}}
+\newcommand{\lsb}{\mathrm{lsb}}
+\newcommand{\SK}{\mathit{SK}}
+\newcommand{\PK}{\mathit{PK}}

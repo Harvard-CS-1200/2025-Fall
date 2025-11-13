@@ -1,0 +1,81 @@
+\documentclass[11pt]{article}
+\usepackage{cs1200}
+\usepackage[normalem]{ulem}
+
+\begin{document}
+
+\psHeader{9}{Wed Nov. 19, 2025 (11:59pm)}
+
+Please see the syllabus for the full collaboration and generative AI policy, as well as information on grading, late days, and revisions.
+
+All sources of ideas, including (but not restricted to) any collaborators, AI tools, people outside of the course, websites, ARC tutors, and textbooks other than Hesterberg--Vadhan must be listed on your submitted homework along with a brief description of how they influenced your work. You need not cite core course resources, which are lectures, the Hesterberg--Vadhan textbook, sections, SREs, problem sets and solutions sets from earlier in the semester. If you use any concepts, terminology, or problem-solving approaches not covered in the course material by that point in the semester, you must describe the source of that idea. If you credit an AI tool for a particular idea, then you should also provide a primary source that corroborates it. Github Copilot and similar tools should be turned off when working on programming assignments.
+
+If you did not have any collaborators or external resources, please write 'none.' Please remember to select pages when you submit on Gradescope. A problem set on the border between two letter grades cannot be rounded up if pages are not selected.
+
+\vspace{1em}
+
+\textbf{Your name: }
+
+\textbf{Collaborators and External Resources:}
+
+\textbf{No. of late days used on previous psets: }
+
+\textbf{No. of late days used after including this pset: }
+
+\vspace{0.2in}
+
+\noindent The purpose of this problem set is to to reinforce the definitions and basic theory of our complexity classes and practice $\NP$-completeness proofs and related reductions. 
+
+\begin{enumerate}
+    \item (Complexity Classes and Reductions) Consider the computational problem $\Pi = (\Inputs,\Outputs,f)$ where $\Inputs=\Outputs=\N$ and $f(x)=\N$ for all $x\in \N$.  Show that $\Pi\in \Psearch$ but $\Pi\notin \NPsearch$.  Thus, $\Psearch\nsubseteq\NPsearch$.
+
+
+    \item ($\NPsearch$-completeness) Consider the following variant of $k$-SAT.
+    
+       \compprob{\FlipkSAT}
+        {A $k$-CNF formula $\varphi(x_0,\ldots,x_{n-1})$}
+        {An assignment $\alpha\in\zo^n$ such that $\varphi(\alpha)=1$ and $\varphi(\neg \alpha)=1$ (if one exists), where $\neg \alpha$ is the bitwise negation of $\alpha$}
+
+        Your proofs for this problem should all include correctness (in both directions) and runtime, following the outline of proofs done in lecture and the textbook.  
+
+        \begin{enumerate}
+        \item Prove that \FlipFourSAT\ is $\NPsearch$-complete by reduction from \ThreeSAT.  (Hint: Add one new variable $y$ and replace each clause $(\ell_0 \vee \ell_1 \vee \ell_2)$ by $(\ell_0 \vee \ell_1 \vee \ell_2 \vee y)$.)
+
+        \item \FlipFourSAT\ can be reduced to \FlipThreeSAT\ by the same method we used to reduce \SAT\ to \ThreeSAT, and thus \FlipThreeSAT\ is also $\NPsearch$-complete.  Using this fact, 
+        prove that \GraphThreeColoring\ is $\NPsearch$-complete. (Hint: use the same construction as we used in the reduction from \ThreeSAT\ to \IndependentSet, except add one extra vertex that's connected to all of the variable-gadget-vertices.)
+
+
+        \item (optional\footnote{This problem won't make a difference between N, L, R-, and R grades. As this problem is purely extra credit, course staff will deprioritize questions about this problem at office hours and on Ed.}) Fill in the omitted details of the reduction from \FlipFourSAT\ to \FlipThreeSAT, with its proof of correctness.
+
+\end{enumerate}
+
+
+\item (Breaking Crypto if $\Ptime=\NP$)  
+Every time your browser or one of your apps makes a secure connection to a website or server, it uses cryptography to make sure that eavesdroppers to the network cannot decipher the information you are transmitting.  Specifically, the following happens at the initiation of a connection between two parties, Alice and Bob.
+\begin{enumerate}
+\item Alice chooses a uniformly random secret key $\SK\in \zo^n$. \label{step:SK}
+\item Alice applies a polynomial-time algorithm $\Gen$ to it to generate a public key $\PK = \Gen(\SK)$, and sends $\PK$ to Bob.
+\item Now whenever Bob wants to send a message $m\in \zo^\ell$ to Alice, Bob generates a uniformly random $\nonce \in \zo^n$ ($\nonce$ means ``number used only once'') and runs a polynomial-time encryption algorithm $\Enc$ to generate a ciphertex $c=\Enc(\PK,m,\nonce)\in \zo^{\ell+n}$.
+\item When Alice receives a ciphertext $c$ from Bob, she runs a polynomial-time decryption algorithm to obtain the message $m=\Dec(\SK,c)$. \label{step:Dec}
+\end{enumerate}
+The correctness of the public-key encryption scheme says Alice will always decrypt correctly, regardless of the random choices: for every $\SK, \nonce\in \zo^n$ and $m\in \zo^\ell$, we have
+$$\Dec(\SK,\Enc(\Gen(\SK),m,\nonce))=m.$$
+As an example, in the probabilistic {\em Rabin} cryptosystem, $\SK$ consists of two random $n/2$-bit prime numbers $p$ and $q$ such that $p, q \equiv 3 \pmod 4$ and $\PK=pq.$ $\nonce$ is interpreted a random number in $\{1,2,\ldots,\PK-1\}$ that is not divisible by either $p$ or $q$.  Then for a 1-bit message $m\in \zo$, 
+$$\Enc(\PK,m,\nonce) = 
+(\nonce^4 \bmod \PK, \lsb(\nonce^2 \bmod \PK)\oplus m),$$
+where $\lsb$ denotes the least-significant bit and $\oplus$ denotes XOR. It turns out that given the prime factors $p$ and $q$ of $\PK$, from $\nonce^4 \bmod \PK$ it is possible to efficiently compute $\nonce^2 \bmod \PK$,\footnote{Specifically $\nonce^2 = (\nonce^4)^{((p-1)(q-1)+4)/8}\bmod \PK$.  Modular exponentiation can be computed in polynomial time (in the bitlength of the base, exponent, and modulus), by a ``repeated square and multiply'' algorithm that we have not covered in cs1200.} and hence decrypt.
+
+For security, it is {\em conjectured} that recovering $m$ from $c$ and $\PK$, or even learning any partial information about $m$, takes time exponential in $n$ (even in the average case).  In the case of the Rabin cryptosystem, this conjecture is known to be true if factoring numbers generated like $\PK$ takes time exponential in $n$ (which also a conjecture).
+
+Prove that if $\Ptime=\NP$, this conjecture is false.  Specifically, there is a polynomial-time algorithm $E$ (for ``Eve,'' the common name cryptographers use for the eavesdropper) such that $E(\PK,c)=m$ whenever $\PK$ and $c$ are generated as in Steps~(\ref{step:SK})--(\ref{step:Dec}) above. Your solution should apply to an arbitrary encryption scheme, not only the example Rabin scheme shown above.
+(Hint: define an appropriate $\NPsearch$ problem $\Pi$ such that solving $\Pi$ in polynomial time enables decrypting $m$.  There are multiple ways to do this!  When proving correctness of your solution, recall that an algorithm solving $\Pi$ is only guaranteed to produce {\em some} valid output on each input.)
+
+\item (reflection) Describe one theoretical idea from this course that you have found beautiful, and explain why it is beautiful to you.  Your answer should: (1) explain the idea in a way that could be understood by a classmate who has taken classes CS20 and CS50 but has not yet taken this class and (2) address how this beauty is similar to or different from other kinds of beauty that human beings encounter.
+
+Quick note on grading: Good responses are usually about a paragraph, with something like 7 or 8 sentences. Most importantly, please make sure your answer is specific to this class and your experiences in it. If your answer could have been edited lightly to apply to another class at Harvard, points will be taken off.
+
+\item Once you're done with this problem set, please fill out \href{https://forms.gle/ZZ57rqSAX5u4gsrL7}{this survey} so that we can gather students' thoughts on the problem set, and the class in general. It's not required, but we really appreciate all responses!
+
+\end{enumerate}
+
+\end{document}
